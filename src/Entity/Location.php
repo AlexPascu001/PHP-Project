@@ -33,6 +33,9 @@ class Location
     #[ORM\OneToMany(mappedBy: 'location_id', targetEntity: Station::class)]
     private $stations;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $City;
+
     public function __construct()
     {
         $this->stations = new ArrayCollection();
@@ -129,6 +132,18 @@ class Location
                 $station->setLocation(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->City;
+    }
+
+    public function setCity(string $City): self
+    {
+        $this->City = $City;
 
         return $this;
     }
