@@ -10,27 +10,27 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 
 </style>
-<div class="example-wrapper">
- {{ form(form) }}
-</div>
 <div class="container-fluid">
+    {{ form(form) }}
     <table class="table">
         <thead>
         <tr>
             <th scope="col">Station ID</th>
             <th scope="col">Station Location Name</th>
+            <th scope="col">Station City</th>
             <th scope="col">Station Power</th>
             <th scope="col">Station Charge Type</th>
         </tr>
         </thead>
         <tbody>
         {% for station in stations %}
-            <tr>
-                <th scope="row"> {{ station.id }}</th>
-                <td > {{ station.location.name }}</td>
-                <td> {{ station.power }}</td>
-                <td> {{ station.type }}</td>
-            </tr>
+                <tr>
+                    <th scope="row"> {{ station.id }}</th>
+                    <td > {{ station.location.name }}</td>
+                    <td > {{ station.location.city }}</td>
+                    <td> {{ station.power }}</td>
+                    <td> {{ station.type }}</td>
+                </tr>
         {% endfor %}
         </tbody>
     </table>

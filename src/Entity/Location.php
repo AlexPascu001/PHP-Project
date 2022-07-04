@@ -34,7 +34,7 @@ class Location
     private $stations;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $City;
+    private $city;
 
     public function __construct()
     {
@@ -138,12 +138,12 @@ class Location
 
     public function getCity(): ?string
     {
-        return $this->City;
+        return $this->city;
     }
 
-    public function setCity(string $City): self
+    public function setCity(string $city): self
     {
-        $this->City = $City;
+        $this->city = $city;
 
         return $this;
     }

@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Location;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -38,6 +39,16 @@ class LocationRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    public function getCities(): array
+    {
+        $query = $this->createQueryBuilder('l')
+            ->select('distinct l.city')
+            ->getQuery()
+        ;
+        return $query->execute(array(), Query::HYDRATE_SCALAR_COLUMN);
+    }
+
 
 //    /**
 //     * @return Location[] Returns an array of Location objects
