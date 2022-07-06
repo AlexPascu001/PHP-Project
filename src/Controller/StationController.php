@@ -26,9 +26,8 @@ class StationController extends AbstractController
 
     #[Route('/', name: 'app_station')]
 
-    public function index(Request $request, LocationRepository $locationRepository, StationRepository $stationRepository): Response
+    public function index(Request $request, StationRepository $stationRepository): Response
     {
-        $allStations = $this->manager->getRepository('App\Entity\Station')->findAll();
         $form = $this->createForm(FilterFormType::class);
         $form->handleRequest($request);
 
@@ -36,24 +35,15 @@ class StationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $cityFound = $form->getData();
         }
-//        dd($cityFound);
-//        if (in_array('Select city', $cityFound)) {
-//            if ($cityFound['type'] == -1)
-//                $stations = $stationRepository->findAll();
-//            else
-//                $stations = $stationRepository->getSelectedStationsType($cityFound['type']);
-//        }
-//        else {
-//            if ($cityFound['type'] == -1)
-//                $stations = $stationRepository->getSelectedStationsCity($cityFound['city']);
-//            else
-//                $stations = $stationRepository->getSelectedStations($cityFound['type'], $cityFound['city']);
-//        }
-        $stations = $stationRepository->getSelectedStations($cityFound['type'], $cityFound['city']);
+        $stations = $stationRepository->getSelectedStations($cityFound['type'] ?? -1, $cityFound['city'] ?? 'Select city');
         return $this->render('station/index.html.twig', [
             'controller_name' => 'StationController',
             'stations' => $stations,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'url' => '/book'
         ]);
     }
+
+
+
 }

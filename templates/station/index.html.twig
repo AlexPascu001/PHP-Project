@@ -6,11 +6,14 @@
 
 {% block body %}
 <style>
+    .body {background-color: green;}
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-
+    .h1 {text-align: center; color: green;}
 </style>
 <div class="container-fluid">
+    <p class="h1">Welcome to ChargeIT!</p>
+    <p class="h3">Check out our charging stations!</p>
     {{ form(form) }}
     <table class="table">
         <thead>
@@ -20,6 +23,7 @@
             <th scope="col">Station City</th>
             <th scope="col">Station Power</th>
             <th scope="col">Station Charge Type</th>
+            <th scope="col">Book Station in this Location</th>
         </tr>
         </thead>
         <tbody>
@@ -30,6 +34,7 @@
                     <td > {{ station.location.city }}</td>
                     <td> {{ station.power }}</td>
                     <td> {{ station.type }}</td>
+                    <td> <a href= {{ station.id ~ url }}>Book</a> </td>
                 </tr>
         {% endfor %}
         </tbody>

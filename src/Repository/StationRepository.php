@@ -45,7 +45,7 @@ class StationRepository extends ServiceEntityRepository
     public function getSelectedStations(int $type, string $city) {
         $params = [];
         $dql = 'SELECT s FROM App\Entity\Station s JOIN s.location l WHERE 1=1';
-        if ($type != 1) {
+        if ($type != -1) {
             $dql.= ' AND s.type=:type';
             $params['type'] = $type;
         }
@@ -53,21 +53,18 @@ class StationRepository extends ServiceEntityRepository
             $dql.= ' AND l.city=:city';
             $params['city'] = $city;
         }
+        $dql.= ' ORDER BY s.id';
         $query = $this->getEntityManager()->createQuery($dql)->setParameters($params);
         return $query->getResult();
     }
 
-    public function getSelectedStationsType(int $type) {
-        $dql = 'SELECT s FROM App\Entity\Station s JOIN s.location l WHERE s.type = :type';
-        $query = $this->getEntityManager()->createQuery($dql)->setParameters(['type' => $type]);
+    public function getStationsID() {
+        $dql = 'SELECT s.id FROM App\Entity\Station s ORDER BY s.id';
+        $query = $this->getEntityManager()->createQuery($dql);
         return $query->getResult();
     }
 
-    public function getSelectedStationsCity(string $city) {
-        $dql = 'SELECT s FROM App\Entity\Station s JOIN s.location l WHERE l.city = :city';
-        $query = $this->getEntityManager()->createQuery($dql)->setParameters(['city' => $city]);
-        return $query->getResult();
-    }
+
 
 //    /**
 //     * @return Station[] Returns an array of Station objects
