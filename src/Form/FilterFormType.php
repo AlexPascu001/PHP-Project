@@ -41,8 +41,8 @@ class FilterFormType extends AbstractType
                     '2' => 2
                 ]
             ])
-            ->add('filtreaza', SubmitType::class, [
-                'attr' => ['class' => 'filtreaza']
+            ->add('filter', SubmitType::class, [
+                'attr' => ['class' => 'filter']
             ])
         ;
     }

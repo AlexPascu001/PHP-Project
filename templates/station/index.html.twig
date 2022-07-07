@@ -34,7 +34,7 @@
                     <td > {{ station.location.city }}</td>
                     <td> {{ station.power }}</td>
                     <td> {{ station.type }}</td>
-                    <td> <a href= {{ station.id ~ url }}>Book</a> </td>
+                    <td> <a href= /stations/{{ station.id ~ url }}>Book</a> </td>
                 </tr>
         {% endfor %}
         </tbody>

@@ -24,18 +24,18 @@ class StationController extends AbstractController
         $this->manager = $entityManager;
     }
 
-    #[Route('/', name: 'app_station')]
+    #[Route('/stations', name: 'app_station')]
 
     public function index(Request $request, StationRepository $stationRepository): Response
     {
         $form = $this->createForm(FilterFormType::class);
         $form->handleRequest($request);
 
-        $cityFound = [];
+        $data = [];
         if ($form->isSubmitted() && $form->isValid()) {
-            $cityFound = $form->getData();
+            $data = $form->getData();
         }
-        $stations = $stationRepository->getSelectedStations($cityFound['type'] ?? -1, $cityFound['city'] ?? 'Select city');
+        $stations = $stationRepository->getSelectedStations($data['type'] ?? -1, $data['city'] ?? 'Select city');
         return $this->render('station/index.html.twig', [
             'controller_name' => 'StationController',
             'stations' => $stations,
