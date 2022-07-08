@@ -1,0 +1,10 @@
+# config/packages/nucleos_maps.yaml
+
+bazinga_geocoder:
+  providers:
+    nominatim:
+      factory: Bazinga\GeocoderBundle\ProviderFactory\NominatimFactory
+
+nucleos_maps:
+  geocoder:
+    service: 'bazinga_geocoder.provider.nominatim'

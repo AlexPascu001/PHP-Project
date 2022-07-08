@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello BookingsController!{% endblock %}
+{% block title %}Make a booking{% endblock %}
 
 {% block body %}
 <style>
@@ -42,7 +42,7 @@
             {{ message }}
         </div>
     {% endif %}
-    <button type="button" class="btn btn-primary"><a href={% if app.user %} {{ path('app_station') }} {% else %} {{ path('app_register') }}>Go back</a></button>
+    <button type="button" class="btn btn-primary"><a href={% if app.user %} {{ path('app_station') }} {% else %} {{ path('app_register') }} {% endif %}>Go back</a></button>
     <table class="table">
         <thead>
         <tr>

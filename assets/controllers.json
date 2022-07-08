@@ -1,0 +1,19 @@
+{
+    "controllers": {
+        "@nucleos/maps-bundle": {
+            "openstreetmap": {
+                "enabled": true,
+                "fetch": "lazy",
+                "autoimport": {
+                    "@nucleos/maps-bundle/dist/openstreetmap.css": true
+                }
+            },
+            "googlemaps": {
+                "enabled": true,
+                "fetch": "lazy",
+                "autoimport": []
+            }
+        }
+    },
+    "entrypoints": []
+}

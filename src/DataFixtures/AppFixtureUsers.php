@@ -23,14 +23,14 @@ class AppFixtureUsers extends Fixture
     {
         // $product = new Product();
         // $manager->persist($product);
-        $cities = ["Craiova", "Bucharest", "Cluj", "Brasov", "Iasi"];
-        for ($i = 1; $i < 30; $i += 1) {
-            $user = new User();
-            $user->setName(generateRandomString());
-            $user->setCity($cities[random_int(0, sizeof($cities) - 1)]);
-            $user->setEmail($user->getName()."@gmail.com");
-            $manager->persist($user);
-        }
-        $manager->flush();
+//        $cities = ["Craiova", "Bucharest", "Cluj", "Brasov", "Iasi"];
+//        for ($i = 1; $i < 30; $i += 1) {
+//            $user = new User();
+//            $user->setName(generateRandomString());
+//            $user->setCity($cities[random_int(0, sizeof($cities) - 1)]);
+//            $user->setEmail($user->getName()."@gmail.com");
+//            $manager->persist($user);
+//        }
+//        $manager->flush();
     }
 }
