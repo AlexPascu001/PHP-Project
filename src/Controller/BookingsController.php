@@ -25,6 +25,9 @@ class BookingsController extends AbstractController
         if (!$car) {
             return 'This car does not exist in the database!';
         }
+        if ($car->getChargeType() != $station->getType()) {
+            return 'Station and car do not have the same charging type!';
+        }
         $booking_time = strtotime($charge_end->format('Y-m-d H:i:s')) - strtotime($charge_start->format('Y-m-d H:i:s'));
         if ($booking_time <= 0 or $booking_time > 7200) {
             return 'Bookings must take at most two hours!';
@@ -65,11 +68,14 @@ class BookingsController extends AbstractController
     #[Route('/stations/{id}/book', name: 'app_bookings')]
     public function index(Request $request, ManagerRegistry $managerRegistry, Station $stationtemp): Response
     {
-        $booking_form = $this->createForm(BookingFormType::class);
-        $booking_form->handleRequest($request);
-
         $station_id = $stationtemp->getId();
         $bookings = $managerRegistry->getRepository('App\Entity\Booking')->findBy(['station' => $station_id]);
+
+        $u = $this->getUser()->getUserIdentifier();
+        $user = $managerRegistry->getRepository('App\Entity\User')->findOneBy(['email' => $u]);
+
+        $booking_form = $this->createForm(BookingFormType::class, null, ['user' => $user]);
+        $booking_form->handleRequest($request);
 
         if ($booking_form->isSubmitted() and $booking_form->isValid()) {
             $charge_start = $booking_form->getData()['charge_start'];

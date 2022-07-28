@@ -35,6 +35,11 @@ class Car
         $this->bookings = new ArrayCollection();
     }
 
+    public function __toString(): string
+    {
+        return $this->getLicensePlate();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

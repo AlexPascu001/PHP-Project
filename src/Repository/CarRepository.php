@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Car;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -37,6 +39,13 @@ class CarRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function getCars(User $user): array
+    {
+        $dql = 'SELECT c.license_plate FROM App\Entity\Car c WHERE c.user = :user';
+        $query = $this->getEntityManager()->createQuery($dql)->setParameter('user', $user);
+        return $query->getResult();
     }
 
 //    /**

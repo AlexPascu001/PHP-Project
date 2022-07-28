@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Booking;
 use App\Entity\Station;
+use App\Entity\User;
 use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -41,6 +42,11 @@ class BookingRepository extends ServiceEntityRepository
         }
     }
 
+    public function getUserBookings(User $user) {
+        $dql = 'SELECT b FROM App\Entity\Booking b JOIN App\Entity\Car c WHERE c.user = :user';
+        $query = $this->getEntityManager()->createQuery($dql)->setParameter('user', $user);
+        return $query->getResult();
+    }
 
 //    /**
 //     * @return Booking[] Returns an array of Booking objects

@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use App\Controller\StationController;
+use App\Controller\LocationsController;
 
 class FilterFormType extends AbstractType
 {
@@ -32,14 +32,6 @@ class FilterFormType extends AbstractType
                 'choice_label' => function ($value) {
                     return $value;
                 }
-            ])
-            ->add('type', ChoiceType::class, [
-                'choices' => [
-                    'Select charging type' => -1,
-                    '0' => 0,
-                    '1' => 1,
-                    '2' => 2
-                ]
             ])
             ->add('filter', SubmitType::class, [
                 'attr' => ['class' => 'filter']
